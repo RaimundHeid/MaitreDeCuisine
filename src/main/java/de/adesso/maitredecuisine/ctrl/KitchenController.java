@@ -1,4 +1,4 @@
-package de.adesso.MaitreDeCuisine.ctrl;
+package de.adesso.maitredecuisine.ctrl;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

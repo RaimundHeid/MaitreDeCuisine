@@ -1,4 +1,4 @@
-package de.adesso.MaitreDeCuisine;
+package de.adesso.maitredecuisine;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
