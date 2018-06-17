@@ -1,13 +1,17 @@
 package de.adesso.maitredecuisine.client.edadam;
 
 import de.adesso.maitredecuisine.client.edadam.model.EdamamResult;
+import de.adesso.maitredecuisine.client.edadam.model.Hit;
+import de.adesso.maitredecuisine.client.edadam.model.Recipe;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,16 +38,17 @@ public class EdamamClient {
      * @param ingredients the ingredients
      * @return the recipts
      */
-    public EdamamResult search(List<String> ingredients) {
+    public List<Recipe> search(List<String> ingredients) {
 
         if ((ingredients == null) || (ingredients.isEmpty())) {
             throw new IllegalArgumentException("ingredients must not be empty.");
         }
 
+        List<Recipe> resultList = new ArrayList<>();
+
         String queryString = createQueryString(ingredients);
 
         LOG.debug("search edadam for: {}", queryString);
-
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseUrl)
                 .queryParam("app_id", applicationId)
@@ -52,10 +57,23 @@ public class EdamamClient {
 
 
         RestTemplate restTemplate = new RestTemplate();
-        EdamamResult result = restTemplate.getForObject(builder.toUriString(), EdamamResult.class);
-        LOG.debug(result.toString());
+        try {
+            EdamamResult result = restTemplate.getForObject(builder.toUriString(), EdamamResult.class);
 
-        return result;
+            if (result != null) {
+                LOG.debug(result.toString());
+                for(Hit hit : result.getHits()) {
+                    resultList.add(hit.getRecipe());
+                }
+            }
+
+        }
+        catch (RestClientException e) {
+            LOG.error(String.format("failed to get recipes for %s", queryString), e);
+        }
+
+
+        return resultList;
 
     }
 

@@ -45,6 +45,11 @@ public class Recipe {
     private Float totalWeight;
 
     /**
+     * Ingredients list as Text
+     */
+    private List<String> ingredientLines;
+
+    /**
      * Ingredients list
      */
     private List<Ingredient> ingredients;
