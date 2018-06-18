@@ -3,4 +3,4 @@ edamam:
   applicationId: 6c556cc9
   applicationKey: 17970aaea3ec4f3a2ae85f1976d1bb36
 maitre:
-  loadmodel: true
+  loadmodel: false
