@@ -8,6 +8,6 @@ import java.util.List;
 public class RecipeDTO {
     private String url;
     private String label;
-    private ImageDTO image;
+    private String imageUrl;
     private List<String> ingredientLines;
 }

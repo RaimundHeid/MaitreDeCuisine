@@ -12,10 +12,11 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
- * Client for the <a href="https://developer.edamam.com/edamam-docs-recipe-api">Edamam-API</a>
+ * Client für die <a href="https://developer.edamam.com/edamam-docs-recipe-api">Edamam-API</a>
  */
 @Component
 public class EdamamClient {
@@ -33,12 +34,12 @@ public class EdamamClient {
 
 
     /**
-     * Search the edamam database for a recipt containing some ingredients
+     * Durchsucht die Edamam Datenbank nach Rezepten, die bestimmte Zutaten enthalten.
      *
-     * @param ingredients the ingredients
-     * @return the recipts
+     * @param ingredients die Zutaten
+     * @return die Rezepte
      */
-    public List<Recipe> search(List<String> ingredients) {
+    public List<Recipe> search(Collection<String> ingredients) {
 
         if ((ingredients == null) || (ingredients.isEmpty())) {
             throw new IllegalArgumentException("ingredients must not be empty.");
@@ -62,13 +63,12 @@ public class EdamamClient {
 
             if (result != null) {
                 LOG.debug(result.toString());
-                for(Hit hit : result.getHits()) {
+                for (Hit hit : result.getHits()) {
                     resultList.add(hit.getRecipe());
                 }
             }
 
-        }
-        catch (RestClientException e) {
+        } catch (RestClientException e) {
             LOG.error(String.format("failed to get recipes for %s", queryString), e);
         }
 
@@ -77,14 +77,18 @@ public class EdamamClient {
 
     }
 
-    private String createQueryString(List<String> ingredients) {
+    private String createQueryString(Collection<String> ingredients) {
         StringBuilder queryString = new StringBuilder();
-        for(int i = 0; i < ingredients.size(); i++) {
-            if (i > 0) {
+
+        boolean firstElement = true;
+        for (String ingredient : ingredients) {
+            if (!firstElement) {
                 queryString.append(",");
             }
-            queryString.append(ingredients.get(i).trim());
+            firstElement = false;
+            queryString.append(ingredient);
         }
+
         return queryString.toString();
     }
 

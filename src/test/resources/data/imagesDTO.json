@@ -1,0 +1,52 @@
+{
+  "images": [
+    {
+      "id": 1,
+      "mimeType": null,
+      "content": null,
+      "recognizedObjects": null
+    },
+    {
+      "id": 2,
+      "mimeType": null,
+      "content": null,
+      "recognizedObjects": [
+        {
+          "label": "Zucker",
+          "quality": 0.7
+        },
+        {
+          "label": "Tomate",
+          "quality": 0.75
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "mimeType": null,
+      "content": null,
+      "recognizedObjects": [
+        {
+          "label": "Brot",
+          "quality": 0.8
+        },
+        {
+          "label": "Gurke",
+          "quality": 0.9
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "mimeType": null,
+      "content": null,
+      "recognizedObjects": [
+        {
+          "label": "Gurke",
+          "quality": 0.9
+        }
+      ]
+    }
+
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "images": [
+    {
+      "id": 1,
+      "mimeType": null,
+      "content": "Y29udC0x",
+      "recognizedObjects": null
+    },
+    {
+      "id": 2,
+      "mimeType": null,
+      "content": "Y29udC0y",
+      "recognizedObjects": [
+        {
+          "label": "Zucker",
+          "quality": 0.7
+        },
+        {
+          "label": "Tomate",
+          "quality": 0.75
+        }
+      ]
+    }
+  ]
+}
