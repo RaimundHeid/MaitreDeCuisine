@@ -48,7 +48,7 @@ public class GraphModelTest {
     @Test
     public void testModelLoads() throws IOException {
         ReflectionTestUtils.setField(graphModel,"loadModel",true);
-        graphModel.load();
+        graphModel.loadGraph();
         assertNotNull(graphModel.getGraph());
     }
 

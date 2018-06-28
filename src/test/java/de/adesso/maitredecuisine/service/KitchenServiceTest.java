@@ -3,10 +3,8 @@ package de.adesso.maitredecuisine.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.adesso.maitredecuisine.MaitreDeCuisineApplication;
 import de.adesso.maitredecuisine.client.edadam.model.Recipe;
-import de.adesso.maitredecuisine.dto.ImageDTO;
 import de.adesso.maitredecuisine.dto.ImagesDTO;
 import de.adesso.maitredecuisine.dto.RecipesDTO;
-import de.adesso.maitredecuisine.dto.RecognizedObjectDTO;
 import de.adesso.maitredecuisine.imagerecognition.RecognitionResult;
 import de.adesso.maitredecuisine.imagerecognition.RecognitionService;
 import org.junit.Test;
@@ -17,7 +15,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.util.CollectionUtils;
 
 import java.io.IOException;
 import java.util.*;
@@ -100,9 +97,9 @@ public class KitchenServiceTest {
     public void enrichWithIngredient() throws IOException {
 
         Mockito.when(recognitionService.recognize("cont-1".getBytes()))
-                .thenReturn(Arrays.asList( new RecognitionResult("Gurke", 0.75),  new RecognitionResult("Tomate", 0.9)));
+                .thenReturn(Arrays.asList( new RecognitionResult( "Gurke", 0.75f),  new RecognitionResult( "Tomate", 0.9f)));
         Mockito.when(recognitionService.recognize("cont-2".getBytes()))
-                .thenReturn(Arrays.asList( new RecognitionResult("Brot", 0.5)));
+                .thenReturn(Arrays.asList( new RecognitionResult( "Brot", 0.5f)));
 
         ImagesDTO images = objectMapper.readValue(
                 resourceLoader.getResource("classpath:data/emptyImagesDTO.json").getInputStream(), ImagesDTO.class);

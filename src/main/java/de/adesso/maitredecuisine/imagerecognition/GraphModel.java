@@ -1,25 +1,29 @@
 package de.adesso.maitredecuisine.imagerecognition;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 import org.tensorflow.Graph;
-import org.tensorflow.SavedModelBundle;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.io.InputStream;
 
+/**
+ * Lädt das Neuronale Netz aus einer Datei in den Speicher
+ */
 @Component
 public class GraphModel {
 
-    @Value("classpath:/model/oidv2")
+    @Value("classpath:/model/imagenet/saved_model.pb")
     private String modelResourcePath;
 
     @Value("${maitre.loadmodel:true}")
     private boolean loadModel;
 
-    private SavedModelBundle savedModelBundle;
+    private Graph graph;
 
     private final ResourceLoader resourceLoader;
 
@@ -29,21 +33,22 @@ public class GraphModel {
     }
 
     public Graph getGraph() {
-        return savedModelBundle.graph();
+        return graph;
     }
 
     String modelFileName() throws IOException {
         return resourceLoader.getResource(modelResourcePath).getFile().getAbsolutePath();
     }
 
+
     @PostConstruct
-    public void load() throws IOException {
-        if ( loadModel ) {
-            // Das Laden des Models dauert recht lange. Damit sich nicht jeder Test damit herumplagen muss,
-            // ist das Laden des Models konfigurierbar
-            String fileName = modelFileName();
-            savedModelBundle = SavedModelBundle.load(fileName, "serve");
+    public void loadGraph() throws IOException {
+        graph = new Graph();
+        try (InputStream in = resourceLoader.getResource(modelResourcePath).getInputStream()) {
+            byte[] graphDef =  IOUtils.toByteArray(in);
+            graph.importGraphDef(graphDef);
         }
+
     }
 
 

@@ -10,10 +10,10 @@ import java.util.Objects;
 public class RecognitionResult implements Comparable<RecognitionResult> {
 
     private final String label;
-    private final double quality;
+    private final float quality;
 
 
-    public RecognitionResult(String label, double quality) {
+    public RecognitionResult( String label, float quality) {
         this.label = label;
         this.quality = quality;
     }
@@ -22,13 +22,13 @@ public class RecognitionResult implements Comparable<RecognitionResult> {
         return label;
     }
 
-    public double getQuality() {
+    public float getQuality() {
         return quality;
     }
 
     @Override
     public int compareTo(RecognitionResult other) {
-        return Double.compare(other.quality, quality);
+        return Float.compare(other.quality, quality);
     }
 
     @Override
@@ -42,5 +42,10 @@ public class RecognitionResult implements Comparable<RecognitionResult> {
     @Override
     public int hashCode() {
         return Objects.hash(label, quality);
+    }
+
+    @Override
+    public String toString() {
+        return "RecognitionResult{" + "label='" + label + '\'' + ", quality=" + quality + '}';
     }
 }
