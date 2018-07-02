@@ -1,0 +1,142 @@
+dummy
+cock
+hen
+ptarmigan
+ruffed grouse
+prairie chicken
+peacock
+quail
+partridge
+goose
+black swan
+snail
+slug
+sea slug
+chiton
+Dungeness crab
+rock crab
+fiddler crab
+king crab
+American lobster
+spiny lobster
+crayfish
+hermit crab
+isopod
+white stork
+black stork
+Chihuahua
+basset
+beagle
+bluetick
+Walker hound
+German short-haired pointer
+German shepherd
+starfish
+sea urchin
+hare
+Angora
+hamster
+porcupine
+wild boar
+ox
+bison
+eel
+coho
+rock beauty
+anemone fish
+sturgeon
+gar
+lionfish
+puffer
+bakery
+beacon
+beer bottle
+beer glass
+bell cote
+cab
+caldron
+clog
+cocktail shaker
+coffee mug
+coffeepot
+dining table
+dock
+drumstick
+Dutch oven
+espresso maker
+flute
+frying pan
+grocery store
+honeycomb
+maze
+measuring cup
+milk can
+mitten
+mixing bowl
+pitcher
+plastic bag
+restaurant
+rotisserie
+saltshaker
+soup bowl
+toaster
+water bottle
+water jug
+whiskey jug
+wine bottle
+wok
+wooden spoon
+plate
+guacamole
+consomme
+hot pot
+trifle
+ice cream
+ice lolly
+French loaf
+bagel
+pretzel
+cheeseburger
+hotdog
+mashed potato
+head cabbage
+broccoli
+cauliflower
+zucchini
+spaghetti squash
+acorn squash
+butternut squash
+cucumber
+artichoke
+bell pepper
+cardoon
+mushroom
+Granny Smith
+strawberry
+orange
+lemon
+fig
+pineapple
+banana
+jackfruit
+custard apple
+pomegranate
+hay
+carbonara
+chocolate sauce
+dough
+meat loaf
+pizza
+potpie
+burrito
+red wine
+espresso
+cup
+eggnog
+bubble
+rapeseed
+corn
+acorn
+buckeye
+hen-of-the-woods
+bolete

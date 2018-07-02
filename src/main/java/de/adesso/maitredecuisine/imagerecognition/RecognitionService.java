@@ -70,7 +70,7 @@ public class RecognitionService {
             float[][] matrix = new float[(int)t.shape()[0]][(int)t.shape()[1]];
             t.copyTo(matrix);
             List<Prediction> predictions = extractPredictions(matrix[0]);
-            return predictions.stream().map(labelService::createResult).collect(Collectors.toList());
+            return predictions.stream().map(labelService::createResult).filter(labelService::isFood).collect(Collectors.toList());
         }
     }
 

@@ -32,6 +32,7 @@ public class RecognitionServiceTest {
     @Autowired
     private ResourceLoader resourceLoader;
 
+    private String[] imageNames = {"veg1", "veg2", "veg3", "bier","erdbeere","tomate"};
 
     @Test
     public void testPrepareImage() throws IOException {
@@ -50,10 +51,28 @@ public class RecognitionServiceTest {
         List<RecognitionResult> result = service.detectImage(convertedImage);
         assertNotNull(result);
     }
+
+    @Test
+    public void testDetectImageList() throws IOException {
+        ReflectionTestUtils.setField(graphModel,"loadModel",true);
+        graphModel.loadGraph();
+        for (String name : imageNames) {
+            byte[] imageData = loadImage(name + ".jpg");
+            Tensor<Float> convertedImage = service.normalizeImage(imageData);
+            List<RecognitionResult> result = service.detectImage(convertedImage);
+            writeResult(name,result);
+        }
+    }
+
     private byte[] loadImage(String name) throws IOException {
         try (InputStream in = resourceLoader.getResource("classpath:/images/" + name).getInputStream()) {
             return IOUtils.toByteArray(in);
         }
     }
 
+    private void writeResult(String name, List<RecognitionResult> results) {
+        for (RecognitionResult r : results) {
+            System.out.println(name + ": " + r.getLabel() + "   " + r.getQuality());
+        }
+    }
 }
