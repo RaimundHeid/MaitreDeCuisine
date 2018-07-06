@@ -11,6 +11,9 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -81,15 +84,21 @@ public class EdamamClient {
         StringBuilder queryString = new StringBuilder();
 
         boolean firstElement = true;
-        for (String ingredient : ingredients) {
-            if (!firstElement) {
-                queryString.append(",");
+        try {
+            for (String ingredient : ingredients) {
+                if (!firstElement) {
+                    queryString.append(",");
+                }
+                firstElement = false;
+                queryString.append(URLEncoder.encode(ingredient, "utf-8"));
             }
-            firstElement = false;
-            queryString.append(ingredient);
+
+            return queryString.toString();
+        } catch (UnsupportedEncodingException e) {
+            LOG.error("utf-8 not supportet.");
         }
 
-        return queryString.toString();
+        return "";
     }
 
 

@@ -2,6 +2,7 @@ package de.adesso.maitredecuisine.imagerecognition;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.tensorflow.*;
 
@@ -21,7 +22,8 @@ public class RecognitionService {
     private static final float IMAGE_MEAN=0.0f;
     private static final float IMAGE_SCALE=255.0f;
 
-    private static final float QUALITY_CUTOFF = 0.01f;
+    @Value("${maitre.ingredients.threshold}")
+    private float qualityCutoff;
     private static final int MAX_RESULTS = 10;
 
 
@@ -75,11 +77,17 @@ public class RecognitionService {
     }
 
     List<Prediction> extractPredictions(float[] detectionResult) {
+
+        float iQualityCutoff = qualityCutoff;
+
         List<Prediction> result = new ArrayList<>();
-        for (int i = 0; i < detectionResult.length; i++) {
-            if (detectionResult[i] > QUALITY_CUTOFF) {
-                result.add( new Prediction(i,detectionResult[i]));
+        while(result.isEmpty()) {
+            for (int i = 0; i < detectionResult.length; i++) {
+                if (detectionResult[i] > iQualityCutoff) {
+                    result.add(new Prediction(i, detectionResult[i]));
+                }
             }
+            iQualityCutoff = iQualityCutoff / 2;
         }
         Collections.sort(result);
         if (result.size() > MAX_RESULTS) {

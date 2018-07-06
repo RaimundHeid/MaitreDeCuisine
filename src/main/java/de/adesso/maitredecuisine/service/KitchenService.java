@@ -5,7 +5,6 @@ import de.adesso.maitredecuisine.dto.*;
 import de.adesso.maitredecuisine.imagerecognition.RecognitionResult;
 import de.adesso.maitredecuisine.imagerecognition.RecognitionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -15,10 +14,6 @@ import java.util.Set;
 
 @Component
 public class KitchenService {
-
-    @Value("${maitre.ingredients.threshold}")
-    private double ingredientsThreshold;
-
 
     private final RecognitionService recognitionService;
 
@@ -79,7 +74,6 @@ public class KitchenService {
         Set<String> allIngredients = new HashSet<>();
         images.getImages().stream().filter(imageDTO -> !CollectionUtils.isEmpty(imageDTO.getRecognizedObjects()))
                 .forEach(imageDTO -> imageDTO.getRecognizedObjects().stream()
-                        .filter(recognizedObjectDTO -> recognizedObjectDTO.getQuality() >= ingredientsThreshold)
                         .forEach(recognizedObjectDTO -> allIngredients.add(recognizedObjectDTO.getLabel())));
         return allIngredients;
     }
