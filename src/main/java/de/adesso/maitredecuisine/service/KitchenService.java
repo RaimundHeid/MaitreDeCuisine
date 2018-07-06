@@ -63,6 +63,7 @@ public class KitchenService {
                         recognizedObjectDTO.setLabel(recognitionResult.getLabel());
                         recognizedObjectDTO.setQuality(recognitionResult.getQuality());
                         image.addRecognizedObjects(recognizedObjectDTO);
+                        image.setContent(null);
                     });
                 }
             }

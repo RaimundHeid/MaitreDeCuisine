@@ -5,4 +5,4 @@ edamam:
 maitre:
   loadmodel: true
   ingredients:
-    threshold: 0.7
+    threshold: 0.0
