@@ -5,8 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
 
-    <title>Maitre de Cuisine</title>
+    <title>Maître de Cuisine</title>
+
+    <h1>Maître de Cuisine</h1>
+
+    <div id="landingarea"
+         class="upload-drop-zone">
+        Just drag images of food here
+    </div>
+
+    <div id="preview">
+        <p>Upload some images</p>
+    </div>
+
+    <input type="file" id="fileinput" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">
+
+    <div class="d-flex">
+        <button id="searchRecipesButton"
+                class="btn btn-primary m-3"
+                type="button">
+            Search for recipes
+        </button>
+        <button id="resetButton"
+                class="btn btn-secondary m-3"
+                type="button">
+            Start over
+        </button>
+    </div>
+
+    <div id="recipes"></div>
 </head>
 <body class="container">
 
