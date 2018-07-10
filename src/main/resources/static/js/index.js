@@ -138,12 +138,18 @@ function renderRecipe(recipe) {
   card.classList.add("w-25");
   card.classList.add("p-3");
 
+  const link = document.createElement("a");
+  link.href = recipe.url;
+  link.target = "_blank";
+
   const image = document.createElement("img");
   image.src = recipe.imageUrl;
   image.classList.add("card-image-top");
   image.classList.add("img-fluid");
   image.alt = recipe.label;
-  card.appendChild(image);
+
+  link.appendChild(image);
+  card.appendChild(link);
 
   const cardBody = document.createElement("div");
   cardBody.classList.add("card-body");
