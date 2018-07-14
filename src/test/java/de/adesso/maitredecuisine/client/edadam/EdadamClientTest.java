@@ -26,7 +26,6 @@ public class EdadamClientTest {
 
     private static final Logger LOG = LoggerFactory.getLogger(EdadamClientTest.class);
 
-
     @Autowired
     private EdamamClient client;
 
@@ -35,25 +34,7 @@ public class EdadamClientTest {
         try {
             client.search(null);
             fail("IllegalArgumentException expected.");
+        } catch (IllegalArgumentException e) {
         }
-        catch (IllegalArgumentException e) {
-        }
-    }
-
-    @Test
-    @Ignore
-    public void search() {
-
-        List<String> ingredients = new ArrayList<>();
-        ingredients.add("tomatoe");
-        ingredients.add("pasta");
-        List<Recipe> search = client.search(ingredients);
-
-        for(Recipe recipe : search) {
-            LOG.debug(recipe.toString());
-        }
-
-
-
     }
 }
