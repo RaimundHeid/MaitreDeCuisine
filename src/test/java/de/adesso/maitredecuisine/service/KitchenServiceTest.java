@@ -125,11 +125,10 @@ public class KitchenServiceTest {
 
         Set<String> ingredients = service.collectAllIngredients(imagesDTO);
 
-        assertEquals(3, ingredients.size());
+        assertEquals(4, ingredients.size());
         assertTrue(ingredients.contains("Tomate"));
         assertTrue(ingredients.contains("Gurke"));
         assertTrue(ingredients.contains("Brot"));
-        assertFalse(ingredients.contains("Zucker"));
-
+        assertTrue(ingredients.contains("Zucker"));
     }
 }
